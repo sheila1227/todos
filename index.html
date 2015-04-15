@@ -1,35 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8"/>
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<script src="js/main.js"></script>
-	<title>todos</title>
-</head>
-<body>
-	<div id="main">
+	<head>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<script src="js/main.js"></script>
+		<title>todos</title>
+	</head>
+	<body>
 		<h1 id="header">todos</h1>
+		<div id="head_banner"></div>
 		<div id="content">
-
-			<div id="head_wraper"></div>
+			<div class="separator"></div>
 			<ul id="notes">
-<!-- 				<li>
-					<input type="checkbox" class="toggle-item-state"/>
-					<div class="todo-item-outer">
-						<div class="todo-item-inner">first thing</div>
-					</div>
-				</li>
-				<li>
-					<div class="todo-item-outer">
-						<div class="todo-item-inner">second thing</div>
-					</div>
-				</li>
-				<li>
-					<div class="todo-item-outer">
-						<div class="todo-item-inner">third thing</div>
-					</div>
+				<!-- 				<li  class="toggle-state-widget-before-selected">
+						<label onclick="alert('jkj');this.parentNode.className='toggle-state-widget-selected'">
+								✔
+						</label>
+						<label>jkjkjjjjjjjjjjjjj</label>
 				</li> -->
 			</ul>
+		</div>
+		<div class="transition"></div>
+		<div class="todo-items-summary">
+			<label id="activeItemsCount"><span>0</span>items left</label>
+			<div class="filters">
+				<label><input class="radio" type="radio" name="filterItems" value="showAllItems"/>All</label>&nbsp;&nbsp;
+				<label><input class="radio" type="radio" name="filterItems" value="showActiveItems"/>Active</label>&nbsp;&nbsp;
+				<label><input class="radio" type="radio" name="filterItems" value="showCompletedItems"/>Completed</label>
+			</div>
+			<button id="btnClearCompletedItems">Clear completed(<span></span>)</button>
 		</div>
 		<div id="footer">
 			<p>Double-click to edit a todo</p>
@@ -38,6 +37,5 @@
 				<a href="https://github.com/sheila1227">SheilaSun</a>
 			</p>
 		</div>
-	</div>
-</body>
+	</body>
 </html>
