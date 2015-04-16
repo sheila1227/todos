@@ -13,11 +13,11 @@ window.onload = function() {
 		(function(num) {
 			filters[i].onclick = function() {
 				if (this.value == "showAllItems") {
-					todoItemCollection.showAllItems();
+					todoItemCollection.showItemsByState();
 				} else if (this.value == "showActiveItems") {
-					todoItemCollection.showActiveItemsOnly();
+					todoItemCollection.showItemsByState(TodoItem.ACTIVE);
 				} else if (this.value == "showCompletedItems") {
-					todoItemCollection.showCompletedItemsOnly();
+					todoItemCollection.showItemsByState(TodoItem.COMPLETED);
 				}
 				var filterLabels = this.parentNode.parentNode.getElementsByTagName("label");
 				for (var j = 0; j < filterLabels.length; j++) {
@@ -38,6 +38,19 @@ window.onload = function() {
 		RefreshItemsSummary();
 	}
 
+
+	//为“chkToggleAllItemState”绑定事件，切换所有item为active或completed
+	document.getElementById("chkToggleAllItemState").onclick=function(){
+		if(this.checked){
+			this.parentNode.setAttribute("style","color:rgba(0,0,0,0.8)");
+			todoItemCollection.changeAllItemsStateTo(TodoItem.COMPLETED);
+		}else{
+			this.parentNode.setAttribute("style","color:rgba(0,0,0,0.2)");
+			todoItemCollection.changeAllItemsStateTo(TodoItem.ACTIVE);
+		}
+		RefreshItemsSummary();
+	}
+
 	//默认显示all items
 	document.getElementsByClassName("radio")[0].click();
 
@@ -48,11 +61,21 @@ window.onload = function() {
 function RefreshItemsSummary() {
 	showActiveItemsCount();
 	showCompletedItemsCount();
+	refreshFilteredItems();
 }
 
-function DeleteItems(){
-	todoItemCollection.deleteItems();
+function DeleteItems(_state){
+	todoItemCollection.deleteItemsByState(_state);
 	RefreshItemsSummary();
+}
+
+function refreshFilteredItems(){
+	var filters = document.getElementsByClassName("radio");
+	for(var i=0;i<filters.length;i++){
+		if(filters[i].checked){
+			filters[i].click();
+		}
+	}
 }
 
 function showActiveItemsCount() {
@@ -85,7 +108,7 @@ TodoItemCollection.prototype.addItem = function(text, state) {
 TodoItemCollection.prototype.deleteItemsByState = function(state) {
 	for (var i = 0; i < this.todoItems.length; i++) {
 		var item = this.todoItems[i];
-		if (item.state === state) {
+		if (item.state === state||!state) {
 			this.ulNode.removeChild(item.liNode);
 			this.todoItems.splice(i,1);
 			i--;
@@ -94,7 +117,21 @@ TodoItemCollection.prototype.deleteItemsByState = function(state) {
 
 }
 
-TodoItemCollection.prototype.removeAllItems = function() {
+TodoItemCollection.prototype.changeAllItemsStateTo = function(_state) {
+		for (var i = 0; i < this.todoItems.length; i++) {
+		var item = this.todoItems[i];
+		switch(_state){
+			case TodoItem.ACTIVE:
+			item.activate();
+			break;
+			case TodoItem.COMPLETED:
+			item.complete();
+			break;
+			case TodoItem.DELETED:
+			item.delete();
+			break;
+			}
+		}
 
 }
 
@@ -109,34 +146,19 @@ TodoItemCollection.prototype.getItemsCountByState = function(_state) {
 	return count;
 }
 
-TodoItemCollection.prototype.showCompletedItemsOnly = function() {
+TodoItemCollection.prototype.showItemsByState = function(_state) {
 	for (var i = 0; i < this.todoItems.length; i++) {
 		var item = this.todoItems[i];
-		if (item.state != TodoItem.COMPLETED) {
-			item.setVisibility(false);
+		if(_state){
+					if (item.state === _state) {
+			item.setVisibility(true);
 		} else {
+			item.setVisibility(false);
+		}
+		}else{
 			item.setVisibility(true);
 		}
 	}
-}
-
-
-TodoItemCollection.prototype.showActiveItemsOnly = function() {
-	for (var i = 0; i < this.todoItems.length; i++) {
-		var item = this.todoItems[i];
-		if (item.state != TodoItem.ACTIVE) {
-			item.setVisibility(false);
-		} else {
-			item.setVisibility(true);
-		}
-	}
-}
-
-TodoItemCollection.prototype.showAllItems = function() {
-	for (var i = 0; i < this.todoItems.length; i++) {
-		this.todoItems[i].setVisibility(true);
-	}
-
 }
 
 function TodoItem(text, state, itemAppearanceSetting, refreshItemsSummaryFunction, deleteItemsFunction) {

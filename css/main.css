@@ -43,6 +43,50 @@ body{
 	color: RGBA(153, 153, 153, 1);
 	font-size: 10px;
 }
+
+#chkToggleAllItemState{
+	display: none;
+}
+
+#lbToggleAllItemState{
+	position: absolute;
+  	float: left;
+  	padding-left: 25px;
+	transform:rotate(90deg);
+	-ms-transform:rotate(90deg); 	/* IE 9 */
+	-moz-transform:rotate(90deg); 	/* Firefox */
+	-webkit-transform:rotate(90deg); /* Safari 和 Chrome */
+	-o-transform:rotate(90deg); 	/* Opera */
+  	color: rgba(0,0,0,0.2);
+  	font-size: 30px;
+}
+
+
+#txtNewTodo{
+	background:RGBA(246, 246, 246, 1);
+	width: 100%;
+	line-height: 3;
+	padding-left:60px;
+	font-size: 20px;
+	border:0;
+	outline: none;
+	box-sizing: border-box;
+	border-bottom: 1px dotted RGBA(204, 204, 204, 1);
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+	font-style: italic;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	font-style: italic;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+	font-style: italic;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+	font-style: italic;
+}
+
 ul{
 	margin: 0px;
 	line-height: 2;
