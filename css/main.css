@@ -110,11 +110,20 @@ ul li:last-child{
 .toggle-state-widget-before-selected > label:nth-child(1),.toggle-state-widget-selected > label:nth-child(1){
 	padding: 5px 10px 5px 10px;
 	font-size: 20px;
+	position: absolute;
+	top:0;
+	bottom: 0;
+	margin:auto;
+	width:40px;
+	height: 40px;
 }
 
 .toggle-state-widget-before-selected > label:nth-child(2),.toggle-state-widget-selected > label:nth-child(2){
-	padding:10px 30px 10px 20px;
+	margin-left: 50px;
+	padding:10px 60px 10px 10px;
 	font-size: 30px;
+	display: block;
+	word-break:break-all;
 }
 
 .toggle-state-widget-before-selected > label:nth-child(1){
@@ -135,6 +144,18 @@ ul li:last-child{
 	text-decoration: line-through;
 }
 
+.toggle-state-widget-before-selected input,.toggle-state-widget-selected input{
+	padding:10px 60px 10px 10px;
+	font-size: 20px;
+	display: none;
+	top:0;
+	box-sizing:border-box;
+	outline: none;
+  	width: 555px;
+  	margin: 1px 1px 1px 44px;
+  	box-shadow: inset -1px -1px 0px rgba(0,0,0,0.1),inset 1px 1px 0px rgba(0,0,0,0.1);
+}
+
 .toggle-state-widget-before-selected button, .toggle-state-widget-selected button{
 	font-size:30px;
 	font-weight: bolder;
@@ -146,6 +167,11 @@ ul li:last-child{
 	right: 20px;
 	bottom: 0;
 	background: none;
+	display: none;
+}
+
+.toggle-state-widget-before-selected:hover button, .toggle-state-widget-selected:hover button{
+	display: inline;
 }
 
 .toggle-state-widget-before-selected button:hover, .toggle-state-widget-selected button:hover{
@@ -198,13 +224,14 @@ ul li:last-child{
 
 #btnClearCompletedItems{
 	background: rgba(0, 0, 0,0.1);
-	padding:0px 10px;
-	border-radius: 3px;
-	float: right;
-	line-height: 25px;
-	outline: none;
-	border:0;
-	box-shadow: 0px -1px 2px rgba(0,0,0,0.3),
+  	padding: 0px 10px;
+  	border-radius: 3px;
+  	line-height: 25px;
+  	outline: none;
+  	border: 0;
+  	box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+  	position: absolute;
+  	right: 5px;
 }
 
 #btnClearCompletedItems:hover{
